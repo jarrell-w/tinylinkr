@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Inconsolata", sans-serif, "Times New Roman";
+}
+body {
+  background-color: rgb(128, 128, 128);
+  height: 100%;
+}
+h1 {
+  font-size: 5rem;
+  color: black;
+  margin-bottom: 65px;
+}
+#copied {
+  display: block;
+  visibility: hidden;
+  font-size: 1.4rem;
+  color: black;
+  margin-bottom: 30px;
+}
+#shortlink {
+  display: block;
+  font-size: 1.8rem;
+  margin-top: 60px;
+}
+main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#container1 {
+  padding: 20px;
+  text-align: center;
+  height: 600px;
+  min-width: 500px;
+  max-width: 100%;
+}
+#container2 {
+  display: grid;
+  grid-template-columns: 1fr 300px 1fr;
+  grid-template-rows: 60px 60px;
+  gap: 2px;
+}
+button,
+form,
+input {
+  all: unset;
+}
+.box,
+form,
+button {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.social-link:hover,
+button:hover,
+#box2:hover {
+  background-color: rgb(237, 237, 237);
+  cursor: pointer;
+}
+.social-link {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+.box img {
+  width: 80%;
+  height: 80%;
+  display: block;
+  margin: 5px auto;
+}
+button {
+  display: block;
+  color: black;
+}
+input:focus::placeholder {
+  color: transparent;
+}
+input {
+  color: rgb(128, 128, 128);
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+footer {
+  height: fit-content;
+  text-align: center;
+  line-height: 1.6;
+}
+footer span {
+  display: block;
+}
