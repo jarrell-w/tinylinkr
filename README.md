@@ -18,4 +18,4 @@ This web app uses DOM manipulation to grab input from the user and upon submit, 
 
 ## Lessons Learned:
 
--This was a great refresh on the use of some of javascripts es6 functions as well as dom manipulation!
+-This was a great refresh on the use of some of javascripts es6 functions as well as dom manipulation.
