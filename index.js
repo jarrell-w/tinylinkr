@@ -1,9 +1,15 @@
 const submitButton = document.getElementById("submit");
-const clipboard = document.getElementById("box2");
-const link = document.getElementById("link");
+const clipboard = document.getElementById("box2");;
 const showShortLink = document.getElementById("shortlink");
 const copied = document.getElementById("copied");
+let link = document.getElementById("link").value
 let shortLink = "";
+
+submitButton.addEventListener('click', () => {
+  link = document.getElementById("link").value
+  console.log(link)
+  getLink()
+})
 
 const validateURL = (url) => {
   if (url.includes(".") && url.includes("https://")) {
@@ -31,17 +37,40 @@ const validateURL = (url) => {
   }
 };
 
-async function getLink() {
-  if (validateURL(link.value)) {
+async function getLink(event) {
+  if (validateURL(link)) {
     try {
-      const request = await fetch(
-        `https://api.shrtco.de/v2/shorten?url=${link.value}`
-      );
-      const response = await request.json();
-      const data = response;
-      setShortLink(data);
-    } catch {
-      console.log("Error getting Data.");
+      //setting Access token to gain api access
+      const accessToken = '0ea0643763937ad36ba4529ae180568143c5904e'
+      const guid = 'Bn8gkuppZLC'
+      //Setting request body to pass to header 
+      const requestBody = {
+        long_url: `${link.value}`,
+        domain: "bit.ly",
+        group_guid: `${guid}`
+      };
+      //calling api and setting header info
+      const request = await fetch(`https://api-ssl.bitly.com/v4/shorten`, {
+        //setting header method
+        method: 'POST', 
+        mode: "cors",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        //setting header body, parses the requestBody object to a string then sends
+        body: JSON.stringify(requestBody)
+      });
+      if (request.ok) {
+        const response = await request.json();
+        console.log(response);
+        const shortLink = response.link;
+        console.log(shortLink);
+        alert('hi');
+        setShortLink(response);
+      }
+    } catch(e) {
+      console.log(e);
     }
   } else {
     showShortLink.innerHTML = "Please enter a valid link!";
@@ -51,8 +80,8 @@ async function getLink() {
 let setShortLink = (obj) => {
   clipboard.style.backgroundColor = "rgb(210, 210, 210)";
   clipboard.onclick = copyToClipboard;
-  shortLink = `${obj.result["short_link"]}`;
-  showShortLink.innerHTML = `Your short link is: ${obj.result["short_link"]}`;
+  shortLink = `${obj.link}`;
+  showShortLink.innerHTML = `Your short link is: ${obj.link}`;
 };
 const copyToClipboard = async () => {
   try {
@@ -62,4 +91,3 @@ const copyToClipboard = async () => {
     console.error("Failed to copy: ", err);
   }
 };
-submitButton.onclick = getLink;
